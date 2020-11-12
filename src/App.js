@@ -7,6 +7,7 @@ function App() {
     return (
         <div className="App">
             <header className="App-header">
+                URL is : {process.env.REACT_APP_API_URL}
                 <img src={logo} className="App-logo" alt="logo"/>
                 <Counter/>
                 <p>

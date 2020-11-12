@@ -1,0 +1,11 @@
+{
+  "dev": {
+    "API_URL": "https://reqres.in/api/"
+  },
+  "proud": {
+    "API_URL": "https://reqres.in/api/"
+  },
+  "qa": {
+    "API_URL": "https://reqres.in/api/"
+  }
+}
