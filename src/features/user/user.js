@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {loadUserCreator, getUsers} from "../../app/store/users";
+import {loadUserCreator, getUsers, addUserCreator, getStatus} from "../../app/store/users";
 
 const UserList = () => {
 
@@ -8,7 +8,8 @@ const UserList = () => {
     // useSelector(state => state.entities.users.data);
     // or
     const users = useSelector(getUsers);
-    console.log("1");
+
+    const loadingStatus = useSelector(getStatus);
 
     useEffect(() => {
         dispatch(loadUserCreator());
@@ -16,9 +17,22 @@ const UserList = () => {
     }, []);
 
     return (
-        <ul>
-            {users.map(user => (<li key={user.id}>{user.email}</li>))}
-        </ul>
+        <div>
+            <button type="submit" onClick={() => dispatch(loadUserCreator())}>Load</button>
+            <button type="submit" onClick={() => dispatch(
+                addUserCreator(
+                    {
+                        id: new Date().getTime(),
+                        email: "user-" + new Date().getTime(),
+                        job: "leader"
+                    }
+                ))}>Add New
+            </button>
+            <p>{loadingStatus ? 'Loading...' : ''}</p>
+            <ul>
+                {users.map(user => (<li key={user.id}>{user.email}</li>))}
+            </ul>
+        </div>
     );
 };
 export default UserList;
