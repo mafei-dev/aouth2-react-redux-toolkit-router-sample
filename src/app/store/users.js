@@ -5,6 +5,7 @@ import {apiCallBegan} from "./middleware/api";
 const usersSlice = createSlice({
     name: "users",
     initialState: {
+        authenticated: true,
         data: [
             {
                 "id": 1,
@@ -73,7 +74,6 @@ export const addUserCreator = user => apiCallBegan({
     onError: userLoadedFailed.type,
 });
 
-
 //Selectors
 export const getUsers = createSelector(
     state => state.entities.users,
@@ -84,6 +84,13 @@ export const getStatus = createSelector(
     state => state.entities.users,
     users => {
         return users.loading;
+    }
+);
+
+export const getIsAuthenticated = createSelector(
+    state => state.entities.users,
+    users => {
+        return users.authenticated;
     }
 );
 export const getBugsBuyUser = userId => createSelector(

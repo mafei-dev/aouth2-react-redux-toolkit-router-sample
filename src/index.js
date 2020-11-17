@@ -5,12 +5,21 @@ import App from './App';
 import store from './app/store/store';
 import {Provider} from 'react-redux';
 import * as serviceWorker from './serviceWorker';
-import UserList from "./features/user/user";
+import MerchantComponent from "./merchant/Merchant.component";
+import {BrowserRouter, Route} from "react-router-dom";
+import ProtectedRoute from "./merchant/ProtectedRoute";
+import LoginComponent from "./merchant/Login.component";
 
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
-            <UserList/>
+            <BrowserRouter>
+
+                {/*<UserList/>*/}
+                {/*<AuthExample/>*/}
+                <Route path="/login" exact component={LoginComponent}/>
+                <ProtectedRoute path="/" exact component={MerchantComponent}/>
+            </BrowserRouter>
         </Provider>
     </React.StrictMode>,
     document.getElementById('root')
