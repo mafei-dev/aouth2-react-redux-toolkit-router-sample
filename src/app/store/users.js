@@ -1,11 +1,18 @@
 import {createSlice, createSelector} from '@reduxjs/toolkit';
 
-import {apiCallBegan} from "./middleware/api";
+import {apiCallBegan, apiCallSuccess} from "./middleware/api";
 
+const hasToken = () => {
+    if (localStorage.getItem(process.env.REACT_APP_ACCESS_TOKEN)) {
+        return true;
+    } else {
+        return false;
+    }
+}
 const usersSlice = createSlice({
     name: "users",
     initialState: {
-        authenticated: true,
+        authenticated: hasToken(),
         data: [
             {
                 "id": 1,
@@ -50,10 +57,19 @@ const usersSlice = createSlice({
                 return bug.id === action.payload.id
             });
             users.data[index].resolved = true;
+        },
+        updateAuthStatus: (users, action) => {
+            console.log("removeToken.action ", action);
+            if (action.payload.authenticated) {
+
+            } else {
+                localStorage.removeItem(process.env.REACT_APP_ACCESS_TOKEN);
+            }
+            users.authenticated = action.payload.authenticated;
         }
     }
 });
-const {addUser, updateUser, bugAssignToUser, addAll, userLoaded, userLoadedFailed} = usersSlice.actions;
+const {addUser, updateAuthStatus, updateUser, bugAssignToUser, addAll, userLoaded, userLoadedFailed} = usersSlice.actions;
 export default usersSlice.reducer;
 
 
@@ -65,6 +81,7 @@ export const loadUserCreator = () => apiCallBegan({
     onSuccess: addAll().type,
     onError: userLoadedFailed.type,
 });
+
 export const addUserCreator = user => apiCallBegan({
     url: "/users",
     method: "POST",
@@ -73,6 +90,11 @@ export const addUserCreator = user => apiCallBegan({
     onSuccess: addUser().type,
     onError: userLoadedFailed.type,
 });
+
+
+export const updateAuthCreator = (data) => (dispatch, getState) => {
+    dispatch(updateAuthStatus(data));
+}
 
 //Selectors
 export const getUsers = createSelector(
@@ -90,7 +112,7 @@ export const getStatus = createSelector(
 export const getIsAuthenticated = createSelector(
     state => state.entities.users,
     users => {
-        return users.authenticated;
+        return users.authenticated && localStorage.getItem(process.env.REACT_APP_ACCESS_TOKEN);
     }
 );
 export const getBugsBuyUser = userId => createSelector(

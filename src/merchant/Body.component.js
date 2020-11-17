@@ -1,16 +1,18 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect} from 'react';
 import PropTypes from 'prop-types';
+import {getUser} from "./service/Header.service";
+import {useDispatch} from "react-redux";
 
-class BodyComponent extends Component {
-    render() {
-        return (
-            <div>
-                BodyComponent
-            </div>
-        );
-    }
+const BodyComponent = () => {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        getUser(dispatch);
+    })
+
+    return (
+        <div>
+            BodyComponent
+        </div>
+    );
 }
-
-BodyComponent.propTypes = {};
-
 export default BodyComponent;

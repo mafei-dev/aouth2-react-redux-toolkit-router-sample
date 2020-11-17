@@ -8,7 +8,12 @@ class LoginComponent extends Component {
             <div>
                 Login
                 <br/>
-                <Link to={"/"}>List</Link>
+                <a className="btn btn-block social-btn google"
+                   href={process.env.REACT_APP_FACEBOOK_PAY_GOOGLE_AUTH_URL}>Google</a>
+                <button onClick={() => {
+                    console.log("Login with google");
+                }}>Login with google
+                </button>
             </div>
         );
     }
