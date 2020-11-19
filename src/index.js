@@ -20,10 +20,10 @@ ReactDOM.render(
         <Provider store={store}>
             <BrowserRouter>
                 <Switch>
-                    <ProtectedRoute path="/"  component={MerchantComponent}/>
                     <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}/>
                     <Route path="/login" exact component={LoginComponent}/>
                     <ProtectedRoute path="/profile" exact component={ProfileComponent}/>
+                    <ProtectedRoute path="/"  component={MerchantComponent}/>
                     <Route path="*" component={Page404Component}/>
                 </Switch>
             </BrowserRouter>
