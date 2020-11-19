@@ -12,17 +12,20 @@ import LoginComponent from "./merchant/Login.component";
 import OAuth2RedirectHandler from "./app/oauth2/OAuth2RedirectHandler";
 import ProfileComponent from "./merchant/Profile.component";
 import './app/store/middleware/RestMiddleware';
+import Page404Component from "./app/errors/Page404.component";
+import {Switch} from "react-router-dom";
 
 ReactDOM.render(
     <React.StrictMode>
         <Provider store={store}>
             <BrowserRouter>
-                <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}/>
-                {/*<UserList/>*/}
-                {/*<AuthExample/>*/}
-                <ProtectedRoute path="/" exact component={MerchantComponent}/>
-                <Route path="/login" exact component={LoginComponent}/>
-                <ProtectedRoute path="/profile" exact component={ProfileComponent}/>
+                <Switch>
+                    <ProtectedRoute path="/"  component={MerchantComponent}/>
+                    <Route path="/oauth2/redirect" component={OAuth2RedirectHandler}/>
+                    <Route path="/login" exact component={LoginComponent}/>
+                    <ProtectedRoute path="/profile" exact component={ProfileComponent}/>
+                    <Route path="*" component={Page404Component}/>
+                </Switch>
             </BrowserRouter>
         </Provider>
     </React.StrictMode>,

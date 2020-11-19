@@ -5,7 +5,6 @@ import {useSelector} from "react-redux";
 
 const ProtectedRoute = ({component: Component, ...rest}) => {
     const isAuthenticated = useSelector(getIsAuthenticated);
-    console.log('REACT_APP_FACEBOOK_PAY_GOOGLE_AUTH_URL', process.env.REACT_APP_FACEBOOK_PAY_GOOGLE_AUTH_URL)
     return (
         <Route {...rest} render={props => {
             if (isAuthenticated) {

@@ -12,7 +12,7 @@ export const getUser = (dispatch) => {
         )
         .catch(error => {
                 console.log("error ", error);
-                errorHandel(error.response.status, dispatch);
+                // errorHandel(error.response.status, dispatch);
             }
         );
 }

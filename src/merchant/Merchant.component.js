@@ -2,13 +2,14 @@ import React from 'react';
 import BodyComponent from "./Body.component";
 import HeaderComponent from "./Header.component";
 import SideBarComponent from "./SideBar.component";
+import {Switch} from "react-router-dom";
+import {Route} from "react-router-dom";
 
 const MerchantComponent = () => {
 
-
-
     return (
         <div>
+
             <HeaderComponent/>
             <div className="container">
                 <div className="row">
@@ -20,8 +21,10 @@ const MerchantComponent = () => {
                     </div>
                 </div>
             </div>
+
         </div>
     );
 }
 
 export default MerchantComponent;
+
