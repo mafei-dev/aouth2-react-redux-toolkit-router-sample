@@ -27,7 +27,8 @@ const usersSlice = createSlice({
     },
     reducers: {
         userLoaded: (users, action) => {
-            users.loading = true;
+            // console.log("action.payload  ", action.payload);
+            users.loading = action.payload;
         },
         userLoadedFailed: (users, action) => {
             users.loading = false;
@@ -69,7 +70,9 @@ const usersSlice = createSlice({
         }
     }
 });
-const {addUser, updateAuthStatus, updateUser, bugAssignToUser, addAll, userLoaded, userLoadedFailed} = usersSlice.actions;
+const {addUser, updateAuthStatus, updateUser, userLoaded, bugAssignToUser, addAll, userLoadedFailed} = usersSlice.actions;
+export const {userLoaded: LoadingOut} = usersSlice.actions;
+
 export default usersSlice.reducer;
 
 

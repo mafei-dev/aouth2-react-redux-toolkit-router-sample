@@ -1,24 +1,33 @@
 import React, {Component, useEffect} from 'react';
-import PropTypes from 'prop-types';
 import {getUser} from "./service/Header.service";
 import {useDispatch} from "react-redux";
-import {Switch} from "react-router-dom";
-import {Route} from "react-router-dom";
-import {Tab1, Tab2, Tab3} from "../sample/body/tabs";
+import AddNewButton from "../resources/add-new.png";
+import {Col, Image} from "react-bootstrap";
+import AddItemComponent from "./shop/AddItem.component";
+
+const ShopGridItem = ({name}) => {
+    return (
+        <>
+            <Col xs={6} sm={3} lg={2} md={3}>
+                <center>{name}</center>
+                <Image src={AddNewButton}
+                       className={"img-thumbnail rounded mx-auto d-block"}
+                       style={{backgroundColor: "inherit", borderColor: "#abb3bb", cursor: "pointer"}} rounded/>
+            </Col>
+        </>
+    );
+}
 const BodyComponent = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         getUser(dispatch);
-    })
+    });
 
     return (
-        <div>
-            <Switch>
-                <Route path={"/"} exact component={Tab1}/>
-                <Route path={"/t2"} exact component={Tab2}/>
-                <Route path={"/t3"} exact component={Tab3}/>
-            </Switch>
-        </div>
+        <>
+
+            <AddItemComponent />
+        </>
     );
 }
 export default BodyComponent;

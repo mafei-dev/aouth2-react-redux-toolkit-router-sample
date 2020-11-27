@@ -4,5 +4,5 @@ import usersSlice from "./users";
 
 export default combineReducers({
     counter: counterSlice,
-    users: usersSlice,
+    users: usersSlice
 });
